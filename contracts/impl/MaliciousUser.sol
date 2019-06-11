@@ -14,29 +14,46 @@
 */
 pragma solidity 0.5.7;
 
+import "../iface/IExchange.sol";
+
 contract MaliciousUser
 {
+
+    event LogWithdraw(
+        address tokenAddress,
+        uint96 amount
+    );
 
     // == Public & External Functions ==
     // 
     function createAccount(
         uint pubKeyX,
-        uint pubKeyY
+        uint pubKeyY,
+        address exchangeAddress
         )
         external
         returns (uint24 accountID)
     {
-
+        IExchange exchange;
+        bool   isAccountNew;
+        exchange = IExchange(exchangeAddress);
+        (accountID, isAccountNew) = exchange.createOrUpdateAccount(pubKeyX, pubKeyY);
+        return accountID;
     }
 
     function withdraw(
-        address token,
-        uint96 amount
+        address tokenAddress,
+        uint96 amount,
+        address exchangeAddress
         )
         external
         returns (bool isSuccess)
     {
-
+        IExchange exchange;
+        exchange = IExchange(exchangeAddress);
+        exchange.withdraw(tokenAddress, amount);
+        emit LogWithdraw(tokenAddress, amount);
+        return true;
     }
 
     function ()
