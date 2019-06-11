@@ -53,7 +53,5 @@ module.exports = {
       gasPrice: 21000000000,
       gas: 6700000
     }
-  },
-  test_directory: 'transpiled/test',
-  migrations_directory: 'transpiled/migrations',
+  }
 };

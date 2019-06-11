@@ -24,6 +24,16 @@ contract MaliciousUser
         uint96 amount
     );
 
+    event LogRecieve(
+        address sender,
+        uint256 amount
+    );
+
+    event LogCreateM(
+        uint pubKeyX,
+        uint pubKeyY
+    );
+
     // == Public & External Functions ==
     // 
     function createAccount(
@@ -32,8 +42,10 @@ contract MaliciousUser
         address exchangeAddress
         )
         external
+        payable
         returns (uint24 accountID)
     {
+        emit LogCreateM(pubKeyX, pubKeyY);
         IExchange exchange;
         bool   isAccountNew;
         exchange = IExchange(exchangeAddress);
@@ -47,6 +59,7 @@ contract MaliciousUser
         address exchangeAddress
         )
         external
+        payable
         returns (bool isSuccess)
     {
         IExchange exchange;
@@ -60,9 +73,10 @@ contract MaliciousUser
         external
         payable
     {
-        uint sum = 0;
-        for (uint i = 0; i < 100; i++) {
+        emit LogRecieve(msg.sender, msg.value);
+        /*uint sum = 0;
+        for (uint i = 0; i < 100000; i++) {
           sum = sum + i;
-        }
+        }*/
     }
 }

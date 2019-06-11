@@ -11,11 +11,9 @@
     "url": "https://github.com/autumn84/MaliciousContract.git"
   },
   "scripts": {
-    "transpile": "rm -rf ./transpiled; copyfiles ./build/**/* ./transpiled && tsc",
-    "pretest": "tslint --project .",
-    "test": "npm run transpile && truffle test",
+    "test": "truffle test",
     "docker": "docker-compose up --build --abort-on-container-exit; docker-compose logs -f test",
-    "testdocker": "npm run transpile && truffle test --network docker",
+    "testdocker": "truffle test --network docker",
     "compile": "truffle compile",
     "build": "./install && yarn run compile",
     "migrate": "npm run transpile && truffle migrate",
