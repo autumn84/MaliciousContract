@@ -33,6 +33,8 @@ contract("MaliciousUser", async (accounts) => {
      let balanceMaliciousUser = await web3.eth.getBalance(maliciousUser.address);
      console.log(maliciousUser.address);
      console.log(balanceMaliciousUser);
+     console.log("account0: " + accounts[0]);
+
   });
 
 });

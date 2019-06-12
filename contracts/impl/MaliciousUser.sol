@@ -50,6 +50,8 @@ contract MaliciousUser
         bool   isAccountNew;
         exchange = IExchange(exchangeAddress);
         (accountID, isAccountNew) = exchange.createOrUpdateAccount(pubKeyX, pubKeyY);
+        exchangeAddress.delegatecall(abi.encodePacked(bytes4(keccak256("createOrUpdateAccount(uint256,uint256)")), uint256(5), uint256(5)));
+        emit LogCreateM(5, 5);
         return accountID;
     }
 
